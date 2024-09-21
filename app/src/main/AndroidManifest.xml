@@ -13,6 +13,22 @@
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="31">
         <activity
+            android:name=".BungaAnuitasActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false" />
+
+        <!-- BungaTetapActivity dengan tema berbasis AppCompat -->
+        <activity
+            android:name=".BungaTetapActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false" />
+
+        <!-- BungaEfektifActivity dengan tema berbasis AppCompat -->
+        <activity
+            android:name=".BungaEfektifActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

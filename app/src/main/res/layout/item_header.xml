@@ -3,58 +3,58 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:stretchColumns="1"
-    android:divider="@android:color/darker_gray"
     android:showDividers="middle">
 
-    <!-- Example of Dynamic Row -->
+    <!-- Header Row -->
     <TableRow
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white">
+        android:background="@color/color_primary">
 
         <TextView
-            android:id="@+id/tv_bulan"
+            android:id="@+id/tv_bulan_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"
-            android:textColor="@color/black"
+            android:text="Bulan"
             android:textSize="16sp"
             android:gravity="center"
+            android:textColor="@color/white"
             android:padding="8dp" />
 
         <TextView
-            android:id="@+id/tv_cicilan_pokok"
+            android:id="@+id/tv_cicilan_pokok_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Rp 500.000"
+            android:text="Cicilan Pokok"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:gravity="center"
-            android:textColor="@color/black"
             android:layout_weight="1"
             android:padding="8dp" />
 
         <TextView
-            android:id="@+id/tv_bunga"
+            android:id="@+id/tv_bunga_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Rp 100.000"
+            android:text="Bunga"
             android:textSize="16sp"
             android:gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:layout_weight="1"
             android:padding="8dp" />
 
         <TextView
-            android:id="@+id/tv_total_cicilan"
+            android:id="@+id/tv_total_cicilan_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Rp 600.000"
+            android:text="Total Cicilan"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:gravity="center"
-            android:textColor="@color/black"
             android:layout_weight="1"
             android:padding="8dp" />
 
     </TableRow>
+
 
 </TableLayout>

@@ -6,89 +6,131 @@
     android:layout_height="match_parent"
     tools:context=".BungaAnuitasActivity">
 
-    <!-- Title -->
-    <TextView
-        android:id="@+id/tv_titleAnuitas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Simulasi Cicilan Anuitas"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/baseline_arrow_back_ios_new_24"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Simulasi Anuitas"
+        android:gravity="center"
+        app:titleTextColor="@android:color/white" />
 
-    <!-- Input Jumlah Pinjaman -->
+
     <EditText
         android:id="@+id/et_pinjamanAnuitas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Masukkan Jumlah Pinjaman"
-        android:inputType="number"
-        android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_titleAnuitas"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_input_rounded"
+        android:hint="Masukkan Jumlah Pinjaman"
+        android:inputType="numberDecimal"
+        android:padding="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <!-- Input Bunga (%) -->
     <EditText
         android:id="@+id/et_bungaAnuitas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_input_rounded"
         android:hint="Masukkan Bunga (%)"
         android:inputType="numberDecimal"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/et_pinjamanAnuitas"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_pinjamanAnuitas" />
 
-    <!-- Input Tenor (Bulan) -->
     <EditText
         android:id="@+id/et_tenorAnuitas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_input_rounded"
         android:hint="Masukkan Tenor (Bulan)"
         android:inputType="number"
         android:padding="12dp"
-        app:layout_constraintTop_toBottomOf="@id/et_bungaAnuitas"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp" />
-
-
-    <!-- Button Hitung -->
-    <Button
-        android:id="@+id/btn_hitungAnuitas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hitung Cicilan"
-        android:padding="12dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/et_tenorAnuitas"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/et_bungaAnuitas" />
 
-    <!-- TableView for Simulasi Cicilan -->
+    <!-- LinearLayout for buttons -->
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_tenorAnuitas">
+
+        <Button
+            android:id="@+id/btn_hitungAnuitas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button"
+            android:padding="14dp"
+            android:text="Hitung"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_generatePdf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button"
+            android:padding="14dp"
+            android:text="Generate PDF"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btn_reset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_button"
+            android:padding="14dp"
+            android:text="Reset"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- RecyclerView for Simulasi Cicilan -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_tabel_simulasiAnuitas"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/btn_hitungAnuitas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_buttons"
         tools:listitem="@layout/item_simulasi_cicilan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

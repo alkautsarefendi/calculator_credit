@@ -3,6 +3,7 @@ package project.alkautsar.simulasikredit
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -24,86 +25,41 @@ class BungaAnuitasActivity : AppCompatActivity() {
 
         // Initialize RecyclerView LayoutManager
         binding.rvTabelSimulasiAnuitas.layoutManager = LinearLayoutManager(this)
+        binding.etPinjamanAnuitas.addTextChangedListener(Util.NumberTextWatcher(binding.etPinjamanAnuitas))
+        binding.etBungaAnuitas.addTextChangedListener(Util.InterestRateTextWatcher(binding.etBungaAnuitas))
 
         // Button click listener
         binding.btnHitungAnuitas.setOnClickListener {
-            val pinjaman = binding.etPinjamanAnuitas.text.toString().toDoubleOrNull() ?: 0.0
-            val bunga = binding.etBungaAnuitas.text.toString().toDoubleOrNull() ?: 0.0
+            // Get pinjaman value after formatting
+            val pinjamanString = binding.etPinjamanAnuitas.text.toString().replace("[^\\d]".toRegex(), "")
+            val pinjaman = pinjamanString.toDoubleOrNull() ?: 0.0
+
+            // Get bunga value after formatting
+            val bungaString = binding.etBungaAnuitas.text.toString().replace("%", "").trim()
+            val bunga = bungaString.toDoubleOrNull() ?: 0.0
+
+            // Get tenor value
             val tenor = binding.etTenorAnuitas.text.toString().toIntOrNull() ?: 0
+
+            // Log the values for debugging
+            Log.d("DEBUG", "Pinjaman: $pinjaman, Bunga: $bunga, Tenor: $tenor")
 
             if (pinjaman > 0 && bunga > 0 && tenor > 0) {
                 val simulasiList = hitungCicilanAnuitas(pinjaman, bunga, tenor)
                 binding.rvTabelSimulasiAnuitas.adapter = SimulasiCicilanAdapter(simulasiList)
+            } else {
+                Log.e("ERROR", "Invalid input values: Pinjaman: $pinjaman, Bunga: $bunga, Tenor: $tenor")
             }
         }
 
-        binding.etPinjamanAnuitas.addTextChangedListener(object : TextWatcher {
-            private var current = ""
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressed() // Handle back button press
+        }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.toString() != current) {
-                    binding.etPinjamanAnuitas.removeTextChangedListener(this)
-
-                    val cleanString = s.toString().replace("[Rp,.]".toRegex(), "")
-
-                    if (cleanString.isNotEmpty()) {
-                        val parsed = cleanString.toDouble()
-                        val formatted = Util().formatRupiah(parsed)
-
-                        current = formatted
-                        binding.etPinjamanAnuitas.setText(formatted)
-                        binding.etPinjamanAnuitas.setSelection(formatted.length)
-                    }
-
-                    binding.etPinjamanAnuitas.addTextChangedListener(this)
-                }
-            }
-        })
-
-        binding.etBungaAnuitas.addTextChangedListener(object : TextWatcher {
-            private var current = ""
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s.toString() != current) {
-                    binding.etBungaAnuitas.removeTextChangedListener(this)
-
-                    val cleanString = s.toString().replace("%", "").trim()
-
-                    if (cleanString.isNotEmpty()) {
-                        val parsed = cleanString.toDouble()
-                        current = "$parsed%"
-                        binding.etBungaAnuitas.setText(current)
-                        binding.etBungaAnuitas.setSelection(current.length)
-                    }
-
-                    binding.etBungaAnuitas.addTextChangedListener(this)
-                }
-            }
-        })
-
-        binding.etTenorAnuitas.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (!s.isNullOrEmpty()) {
-                    val value = s.toString().toIntOrNull()
-                    if (value != null && value > 60) {
-                        binding.etTenorAnuitas.setText("60")
-                        binding.etTenorAnuitas.setSelection(binding.etTenorAnuitas.text.length)
-                    }
-                }
-            }
-
-            override fun afterTextChanged(s: Editable?) {}
-        })
+        // Reset button click listener
+        binding.btnReset.setOnClickListener {
+            resetFields()
+        }
 
     }
 
@@ -122,4 +78,16 @@ class BungaAnuitasActivity : AppCompatActivity() {
 
         return simulasiList
     }
+
+    private fun resetFields() {
+        // Clear input fields
+        binding.etPinjamanAnuitas.text.clear()
+        binding.etBungaAnuitas.text.clear()
+        binding.etTenorAnuitas.text.clear()
+
+        // Clear RecyclerView adapter
+        binding.rvTabelSimulasiAnuitas.adapter = null
+    }
+
+
 }

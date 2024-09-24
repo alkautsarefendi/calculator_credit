@@ -50,14 +50,16 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.play.services.ads)
+//    implementation(libs.itext7.core)
 
     implementation(libs.hilt.android)
-    implementation("javax.inject:javax.inject:1")
-    kapt("com.google.dagger:dagger-compiler:2.46")
+    implementation(libs.javax.inject)
+    kapt(libs.dagger.compiler)
 
-    api("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    api("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    api("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    api(libs.androidx.lifecycle.viewmodel.ktx)
+    api(libs.lifecycle.runtime.ktx)
+    api(libs.androidx.lifecycle.livedata.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

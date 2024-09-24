@@ -2,13 +2,14 @@ package project.alkautsar.simulasikredit
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import project.alkautsar.simulasikredit.databinding.ActivityMainBinding
 import project.alkautsar.simulasikredit.viewmodel.SplashViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseUtils() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -36,5 +37,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, BungaEfektifActivity::class.java)
             startActivity(intent)
         }
+
+        val adViewContainer = binding.nativeAdContainer
+        loadNativeAd(adViewContainer)
+
     }
 }

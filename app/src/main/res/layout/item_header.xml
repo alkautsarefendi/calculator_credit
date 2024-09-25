@@ -15,8 +15,8 @@
             android:id="@+id/tv_bulan_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bulan"
-            android:textSize="16sp"
+            android:text="No"
+            android:textSize="12sp"
             android:gravity="center"
             android:textColor="@color/white"
             android:padding="8dp" />
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:text="Cicilan Pokok"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:gravity="center"
             android:layout_weight="1"
             android:padding="8dp" />
@@ -37,7 +37,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Bunga"
-            android:textSize="16sp"
+            android:textSize="12sp"
             android:gravity="center"
             android:textColor="@color/white"
             android:layout_weight="1"
@@ -49,12 +49,22 @@
             android:layout_height="wrap_content"
             android:text="Total Cicilan"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="12sp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:padding="8dp" />
+
+        <TextView
+            android:id="@+id/tv_sisa_cicilan_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Sisa Cicilan"
+            android:textColor="@color/white"
+            android:textSize="12sp"
             android:gravity="center"
             android:layout_weight="1"
             android:padding="8dp" />
 
     </TableRow>
-
 
 </TableLayout>

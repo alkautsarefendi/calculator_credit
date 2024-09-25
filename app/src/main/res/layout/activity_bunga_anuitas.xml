@@ -12,15 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/baseline_arrow_back_ios_new_24"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="Simulasi Anuitas"
-        android:gravity="center"
         app:titleTextColor="@android:color/white" />
-
 
     <EditText
         android:id="@+id/et_pinjamanAnuitas"
@@ -45,7 +44,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/bg_input_rounded"
-        android:hint="Masukkan Bunga (%)"
+        android:hint="Masukkan Bunga Pertahun(%)"
         android:inputType="numberDecimal"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -62,6 +61,7 @@
         android:background="@drawable/bg_input_rounded"
         android:hint="Masukkan Tenor (Bulan)"
         android:inputType="number"
+        android:maxLength="3"
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -89,6 +89,7 @@
             android:padding="14dp"
             android:text="Hitung"
             android:textColor="@color/white"
+            android:layout_marginEnd="8dp"
             android:textSize="12sp"
             android:textStyle="bold" />
 
@@ -102,6 +103,7 @@
             android:background="@drawable/bg_button"
             android:padding="14dp"
             android:text="Generate PDF"
+            android:visibility="gone"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold" />
@@ -114,10 +116,151 @@
             android:background="@drawable/bg_button"
             android:padding="14dp"
             android:text="Reset"
+            android:layout_marginStart="8dp"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <!-- LinearLayout for summary -->
+    <LinearLayout
+        android:id="@+id/ll_summary"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="@dimen/_16dp"
+        android:background="@drawable/bg_table_row"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/rv_tabel_simulasiAnuitas"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_buttons">
+
+        <!-- Header Row -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Jumlah Pinjaman"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Lama Pinjaman"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Bunga Pertahun"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Ringkasan Angsuran/Bulan"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Data Row -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_jumlah_pinjaman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Rp 0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_lama_pinjaman"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="0 Bulan" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_bunga_pertahun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="0%" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/tv_ringkasan_angsuran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Rp 0" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 
     <!-- RecyclerView for Simulasi Cicilan -->
     <androidx.recyclerview.widget.RecyclerView
@@ -130,7 +273,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ll_buttons"
+        app:layout_constraintTop_toBottomOf="@id/ll_summary"
         tools:listitem="@layout/item_simulasi_cicilan" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

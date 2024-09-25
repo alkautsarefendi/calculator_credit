@@ -20,6 +20,7 @@ class SimulasiCicilanAdapter(private val simulasiList: List<SimulasiCicilan>) :
             binding.tvCicilanPokok.text = Util().formatRupiah(simulasi.cicilanPokok)
             binding.tvBunga.text = Util().formatRupiah(simulasi.bunga)
             binding.tvTotalCicilan.text = Util().formatRupiah(simulasi.totalCicilan)
+            binding.tvSisaCicilan.text = Util().formatRupiah(simulasi.sisaCicilan)
         }
     }
 
@@ -63,5 +64,9 @@ class SimulasiCicilanAdapter(private val simulasiList: List<SimulasiCicilan>) :
         } else {
             VIEW_TYPE_ITEM // Data item untuk posisi selanjutnya
         }
+    }
+
+    fun getData(): List<SimulasiCicilan> {
+        return simulasiList
     }
 }

@@ -53,43 +53,8 @@ class Util {
         }
     }
 
-    class InterestRateTextWatcher(private val editText: EditText) : TextWatcher {
 
-        private var current = ""
 
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            // No action needed
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            // No action needed
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-            if (s.toString() != current) {
-                // Remove the listener to prevent infinite loop
-                editText.removeTextChangedListener(this)
-
-                // Clean the input
-                val cleanString = s.toString().replace("[^\\d]".toRegex(), "")
-                val parsed = cleanString.toLongOrNull()
-
-                // Format the number with .00%
-                current = if (parsed != null) {
-                    "$parsed.00%"
-                } else {
-                    ""
-                }
-
-                // Set the formatted text back to EditText
-                editText.setText(current)
-                editText.setSelection(current.length)
-
-                // Reattach the listener
-                editText.addTextChangedListener(this)
-            }
-        }
-    }
 
 
 }

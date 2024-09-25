@@ -2,9 +2,10 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:stretchColumns="1"
     android:divider="@android:color/darker_gray"
-    android:showDividers="middle">
+    android:background="@drawable/bg_table_row"
+    android:showDividers="middle"
+    android:stretchColumns="1">
 
     <!-- Example of Dynamic Row -->
     <TableRow
@@ -16,44 +17,55 @@
             android:id="@+id/tv_bulan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
             android:text="1"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:padding="8dp" />
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_cicilan_pokok"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Rp 500.000"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/black"
             android:layout_weight="1"
-            android:padding="8dp" />
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Rp 500.000"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_bunga"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Rp 100.000"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/black"
             android:layout_weight="1"
-            android:padding="8dp" />
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Rp 100.000"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
         <TextView
             android:id="@+id/tv_total_cicilan"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Rp 600.000"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/black"
             android:layout_weight="1"
-            android:padding="8dp" />
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Rp 600.000"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_sisa_cicilan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Rp 4.000.000"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
 
     </TableRow>
 

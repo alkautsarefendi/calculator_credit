@@ -1,13 +1,15 @@
-package project.alkautsar.simulasikredit
+package project.alkautsar.simulasikredit.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.FrameLayout
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import project.alkautsar.simulasikredit.utils.BaseUtils
 import project.alkautsar.simulasikredit.databinding.ActivityMainBinding
 import project.alkautsar.simulasikredit.viewmodel.SplashViewModel
+
 
 class MainActivity : BaseUtils() {
 
@@ -38,8 +40,16 @@ class MainActivity : BaseUtils() {
             startActivity(intent)
         }
 
+        binding.cvKprLengkap.setOnClickListener {
+            val intent = Intent(this, SimulasiKPRActivity::class.java)
+            startActivity(intent)
+        }
+
         val adViewContainer = binding.nativeAdContainer
         loadNativeAd(adViewContainer)
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.BannerView.loadAd(adRequest)
 
     }
 }

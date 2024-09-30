@@ -1,4 +1,4 @@
-package project.alkautsar.simulasikredit
+package project.alkautsar.simulasikredit.activity
 
 import android.content.ContentValues
 import android.content.Intent
@@ -10,23 +10,20 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import project.alkautsar.simulasikredit.R
+import project.alkautsar.simulasikredit.utils.Util
+import project.alkautsar.simulasikredit.adapter.SimulasiCicilanAdapter
 import project.alkautsar.simulasikredit.databinding.ActivityBungaAnuitasBinding
-import project.alkautsar.simulasikredit.model.SimulasiCicilan
+import project.alkautsar.simulasikredit.model.SimulasiCicilanModel
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
 import java.io.OutputStream
 
 class BungaAnuitasActivity : AppCompatActivity() {
@@ -98,7 +95,7 @@ class BungaAnuitasActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateSummary(pinjaman: Double, tenor: Int, bunga: Double, simulasiList: List<SimulasiCicilan>) {
+    private fun updateSummary(pinjaman: Double, tenor: Int, bunga: Double, simulasiList: List<SimulasiCicilanModel>) {
         // Menampilkan Jumlah Pinjaman
         jumlahPinjamanTextView.text = "${Util().formatRupiah(pinjaman)}"
 
@@ -117,8 +114,8 @@ class BungaAnuitasActivity : AppCompatActivity() {
         ringkasanAngsuranTextView.text = "${Util().formatRupiah(cicilanBulanan)}"
     }
 
-    private fun hitungCicilanAnuitas(pinjaman: Double, bunga: Double, tenor: Int): List<SimulasiCicilan> {
-        val simulasiList = mutableListOf<SimulasiCicilan>()
+    private fun hitungCicilanAnuitas(pinjaman: Double, bunga: Double, tenor: Int): List<SimulasiCicilanModel> {
+        val simulasiList = mutableListOf<SimulasiCicilanModel>()
 
         // Menghitung bunga bulanan
         val bungaBulanan = bunga / 100 / 12 // Bunga bulanan dari bunga tahunan
@@ -140,7 +137,7 @@ class BungaAnuitasActivity : AppCompatActivity() {
             saldoPinjaman -= pokokBulanIni // Update saldo yang tersisa
 
             // Tambahkan ke daftar dengan properti baru untuk saldo yang tersisa
-            simulasiList.add(SimulasiCicilan(bulan, pokokBulanIni, bungaBulanIni, cicilanPerBulan, saldoPinjaman))
+            simulasiList.add(SimulasiCicilanModel(bulan, pokokBulanIni, bungaBulanIni, cicilanPerBulan, saldoPinjaman))
         }
 
         return simulasiList

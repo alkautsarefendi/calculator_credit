@@ -1,13 +1,14 @@
-package project.alkautsar.simulasikredit
+package project.alkautsar.simulasikredit.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import project.alkautsar.simulasikredit.utils.Util
 import project.alkautsar.simulasikredit.databinding.ItemHeaderBinding
 import project.alkautsar.simulasikredit.databinding.ItemSimulasiCicilanBinding
-import project.alkautsar.simulasikredit.model.SimulasiCicilan
+import project.alkautsar.simulasikredit.model.SimulasiCicilanModel
 
-class SimulasiCicilanAdapter(private val simulasiList: List<SimulasiCicilan>) :
+class SimulasiCicilanAdapter(private val simulasiList: List<SimulasiCicilanModel>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val VIEW_TYPE_HEADER = 0
@@ -15,7 +16,7 @@ class SimulasiCicilanAdapter(private val simulasiList: List<SimulasiCicilan>) :
 
     // ViewHolder untuk item data (cicilan)
     inner class ItemViewHolder(private val binding: ItemSimulasiCicilanBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(simulasi: SimulasiCicilan) {
+        fun bind(simulasi: SimulasiCicilanModel) {
             binding.tvBulan.text = simulasi.bulan.toString()
             binding.tvCicilanPokok.text = Util().formatRupiah(simulasi.cicilanPokok)
             binding.tvBunga.text = Util().formatRupiah(simulasi.bunga)
@@ -66,7 +67,7 @@ class SimulasiCicilanAdapter(private val simulasiList: List<SimulasiCicilan>) :
         }
     }
 
-    fun getData(): List<SimulasiCicilan> {
+    fun getData(): List<SimulasiCicilanModel> {
         return simulasiList
     }
 }

@@ -1,4 +1,4 @@
-package project.alkautsar.simulasikredit
+package project.alkautsar.simulasikredit.utils
 
 import android.text.Editable
 import android.text.TextWatcher

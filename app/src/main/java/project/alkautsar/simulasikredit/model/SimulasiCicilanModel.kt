@@ -1,6 +1,6 @@
 package project.alkautsar.simulasikredit.model
 
-data class SimulasiCicilan(
+data class SimulasiCicilanModel(
     val bulan: Int,
     val cicilanPokok: Double,
     val bunga: Double,

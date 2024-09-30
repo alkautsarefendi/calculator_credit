@@ -1,4 +1,4 @@
-package project.alkautsar.simulasikredit
+package project.alkautsar.simulasikredit.utils
 
 import android.util.DisplayMetrics
 import android.util.Log
@@ -24,6 +24,8 @@ import com.google.android.gms.ads.nativead.NativeAdView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import project.alkautsar.simulasikredit.BuildConfig
+import project.alkautsar.simulasikredit.R
 
 open class BaseUtils : AppCompatActivity() {
     private var adView: AdManagerAdView? =null

@@ -1,4 +1,4 @@
-package project.alkautsar.simulasikredit
+package project.alkautsar.simulasikredit.activity
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -6,8 +6,10 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import project.alkautsar.simulasikredit.utils.Util
+import project.alkautsar.simulasikredit.adapter.SimulasiCicilanAdapter
 import project.alkautsar.simulasikredit.databinding.ActivityBungaEfektifBinding
-import project.alkautsar.simulasikredit.model.SimulasiCicilan
+import project.alkautsar.simulasikredit.model.SimulasiCicilanModel
 
 class BungaEfektifActivity : AppCompatActivity() {
 
@@ -55,7 +57,7 @@ class BungaEfektifActivity : AppCompatActivity() {
 
         // Hitung angsuran pokok per bulan
         val angsuranPokok = pinjaman / tenor // Angsuran pokok per bulan
-        val cicilanList = mutableListOf<SimulasiCicilan>()
+        val cicilanList = mutableListOf<SimulasiCicilanModel>()
         var totalDibayar = 0.0
 
         // Hitung cicilan per bulan
@@ -64,7 +66,7 @@ class BungaEfektifActivity : AppCompatActivity() {
             totalDibayar += totalAngsuran // Akumulasi total yang sudah dibayar
             val sisaCicilan = pinjaman - (angsuranPokok * bulan) // Hitung sisa cicilan
 
-            cicilanList.add(SimulasiCicilan(bulan, angsuranPokok, totalBunga / tenor, totalAngsuran, sisaCicilan))
+            cicilanList.add(SimulasiCicilanModel(bulan, angsuranPokok, totalBunga / tenor, totalAngsuran, sisaCicilan))
         }
 
         // Atur RecyclerView dengan data yang dihitung

@@ -8,6 +8,8 @@ android {
     namespace = "project.alkautsar.simulasikredit"
     compileSdk = 34
 
+    //Keystrore password = 211108
+
     defaultConfig {
         applicationId = "project.alkautsar.simulasikredit"
         minSdk = 21

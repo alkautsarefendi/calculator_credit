@@ -6,28 +6,46 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import project.alkautsar.simulasikredit.utils.Util
 import project.alkautsar.simulasikredit.adapter.SimulasiCicilanAdapter
 import project.alkautsar.simulasikredit.databinding.ActivityBungaTetapBinding
 import project.alkautsar.simulasikredit.model.SimulasiCicilanModel
+import project.alkautsar.simulasikredit.utils.BaseUtils
 
-class BungaTetapActivity : AppCompatActivity() {
+class BungaTetapActivity : BaseUtils() {
 
     private lateinit var binding: ActivityBungaTetapBinding
     private lateinit var cicilanAdapter: SimulasiCicilanAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         // Inflate layout using View Binding
         binding = ActivityBungaTetapBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupInterstitial()
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.BannerView.loadAd(adRequest)
 
         // Hide summary initially
         binding.llSummaryTetap.visibility = LinearLayout.GONE
         binding.etPinjamanTetap.addTextChangedListener(Util.NumberTextWatcher(binding.etPinjamanTetap))
         // Set up the button listeners
-        binding.btnHitungTetap.setOnClickListener { calculateFlatInterest() }
-        binding.btnResetTetap.setOnClickListener { resetFields() }
+        binding.btnHitungTetap.setOnClickListener {
+            showInterstitial()
+            calculateFlatInterest()
+        }
+
+        binding.btnResetTetap.setOnClickListener {
+            resetFields()
+        }
+
+
+
     }
 
     private fun calculateFlatInterest() {
@@ -36,7 +54,10 @@ class BungaTetapActivity : AppCompatActivity() {
         val bungaStr = binding.etBungaTetap.text.toString().replace("%", "").trim()
         val tenorStr = binding.etTenorTetap.text.toString()
 
-        if (TextUtils.isEmpty(pinjamanStr) || TextUtils.isEmpty(bungaStr) || TextUtils.isEmpty(tenorStr)) {
+        if (TextUtils.isEmpty(pinjamanStr) || TextUtils.isEmpty(bungaStr) || TextUtils.isEmpty(
+                tenorStr
+            )
+        ) {
             Toast.makeText(this, "Harap masukkan semua data", Toast.LENGTH_SHORT).show()
             return
         }
@@ -52,7 +73,8 @@ class BungaTetapActivity : AppCompatActivity() {
         }
 
         // Hitung total bunga
-        val totalBunga = pinjaman * (bunga / 100) * (tenor / 12.0) // Total bunga untuk seluruh tenor
+        val totalBunga =
+            pinjaman * (bunga / 100) * (tenor / 12.0) // Total bunga untuk seluruh tenor
 
         // Hitung angsuran pokok per bulan
         val angsuranPokok = pinjaman / tenor // Angsuran pokok per bulan
@@ -65,7 +87,15 @@ class BungaTetapActivity : AppCompatActivity() {
             totalDibayar += totalAngsuran // Akumulasi total yang sudah dibayar
             val sisaCicilan = pinjaman - (angsuranPokok * bulan) // Hitung sisa cicilan
 
-            cicilanList.add(SimulasiCicilanModel(bulan, angsuranPokok, totalBunga / tenor, totalAngsuran, sisaCicilan))
+            cicilanList.add(
+                SimulasiCicilanModel(
+                    bulan,
+                    angsuranPokok,
+                    totalBunga / tenor,
+                    totalAngsuran,
+                    sisaCicilan
+                )
+            )
         }
 
         // Atur RecyclerView dengan data yang dihitung
@@ -77,12 +107,12 @@ class BungaTetapActivity : AppCompatActivity() {
         binding.tvJumlahPinjamanTetap.text = "Rp ${String.format("%,.2f", pinjaman)}"
         binding.tvLamaPinjamanTetap.text = "$tenor Bulan"
         binding.tvBungaTetap.text = "${bungaStr}%"
-        binding.tvAngsuranTetap.text = "Rp ${String.format("%,.2f", (pinjaman + totalBunga) / tenor)}"
+        binding.tvAngsuranTetap.text =
+            "Rp ${String.format("%,.2f", (pinjaman + totalBunga) / tenor)}"
 
         // Tampilkan bagian ringkasan
         binding.llSummaryTetap.visibility = LinearLayout.VISIBLE
     }
-
 
 
     private fun resetFields() {

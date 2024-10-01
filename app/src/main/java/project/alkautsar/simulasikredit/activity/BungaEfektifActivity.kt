@@ -6,12 +6,15 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import project.alkautsar.simulasikredit.utils.Util
 import project.alkautsar.simulasikredit.adapter.SimulasiCicilanAdapter
 import project.alkautsar.simulasikredit.databinding.ActivityBungaEfektifBinding
 import project.alkautsar.simulasikredit.model.SimulasiCicilanModel
+import project.alkautsar.simulasikredit.utils.BaseUtils
 
-class BungaEfektifActivity : AppCompatActivity() {
+class BungaEfektifActivity : BaseUtils() {
 
     private lateinit var binding: ActivityBungaEfektifBinding
     private lateinit var cicilanAdapter: SimulasiCicilanAdapter
@@ -22,12 +25,23 @@ class BungaEfektifActivity : AppCompatActivity() {
         binding = ActivityBungaEfektifBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupInterstitial()
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.BannerView.loadAd(adRequest)
+
         // Hide summary initially
         binding.llSummaryEfektif.visibility = LinearLayout.GONE
         binding.etPinjamanEfektif.addTextChangedListener(Util.NumberTextWatcher(binding.etPinjamanEfektif))
         // Set up the button listeners
-        binding.btnHitungEfektif.setOnClickListener { calculateEffectiveInterest() }
-        binding.btnResetEfektif.setOnClickListener { resetFields() }
+        binding.btnHitungEfektif.setOnClickListener {
+            showInterstitial()
+            calculateEffectiveInterest()
+        }
+        binding.btnResetEfektif.setOnClickListener {
+            resetFields()
+        }
+
     }
 
     private fun calculateEffectiveInterest() {
@@ -36,7 +50,10 @@ class BungaEfektifActivity : AppCompatActivity() {
         val bungaStr = binding.etBungaEfektif.text.toString().replace("%", "").trim()
         val tenorStr = binding.etTenorEfektif.text.toString()
 
-        if (TextUtils.isEmpty(pinjamanStr) || TextUtils.isEmpty(bungaStr) || TextUtils.isEmpty(tenorStr)) {
+        if (TextUtils.isEmpty(pinjamanStr) || TextUtils.isEmpty(bungaStr) || TextUtils.isEmpty(
+                tenorStr
+            )
+        ) {
             Toast.makeText(this, "Harap masukkan semua data", Toast.LENGTH_SHORT).show()
             return
         }
@@ -66,7 +83,15 @@ class BungaEfektifActivity : AppCompatActivity() {
             totalDibayar += totalAngsuran // Akumulasi total yang sudah dibayar
             val sisaCicilan = pinjaman - (angsuranPokok * bulan) // Hitung sisa cicilan
 
-            cicilanList.add(SimulasiCicilanModel(bulan, angsuranPokok, totalBunga / tenor, totalAngsuran, sisaCicilan))
+            cicilanList.add(
+                SimulasiCicilanModel(
+                    bulan,
+                    angsuranPokok,
+                    totalBunga / tenor,
+                    totalAngsuran,
+                    sisaCicilan
+                )
+            )
         }
 
         // Atur RecyclerView dengan data yang dihitung
@@ -78,7 +103,8 @@ class BungaEfektifActivity : AppCompatActivity() {
         binding.tvJumlahPinjamanEfektif.text = "Rp ${String.format("%,.2f", pinjaman)}"
         binding.tvLamaPinjamanEfektif.text = "$tenor Bulan"
         binding.tvBungaEfektif.text = "${bungaStr}%"
-        binding.tvTotalBayarEfektif.text = "Rp ${String.format("%,.2f", (pinjaman + totalBunga) / tenor)}"
+        binding.tvTotalBayarEfektif.text =
+            "Rp ${String.format("%,.2f", (pinjaman + totalBunga) / tenor)}"
 
         // Tampilkan bagian ringkasan
         binding.llSummaryEfektif.visibility = LinearLayout.VISIBLE

@@ -23,6 +23,12 @@ class MainActivity : BaseUtils() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val adViewContainer = binding.nativeAdContainer
+        loadNativeAd(adViewContainer)
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.BannerView.loadAd(adRequest)
+
         binding.cvAnuitas.setOnClickListener {
             val intent = Intent(this, BungaAnuitasActivity::class.java)
             startActivity(intent)
@@ -45,11 +51,7 @@ class MainActivity : BaseUtils() {
             startActivity(intent)
         }
 
-        val adViewContainer = binding.nativeAdContainer
-        loadNativeAd(adViewContainer)
-        MobileAds.initialize(this) {}
-        val adRequest = AdRequest.Builder().build()
-        binding.BannerView.loadAd(adRequest)
+
 
     }
 }

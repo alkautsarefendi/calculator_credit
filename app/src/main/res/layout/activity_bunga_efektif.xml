@@ -21,6 +21,18 @@
         app:title="Penghitungan Bunga Efektif"
         app:titleTextColor="@android:color/white" />
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/BannerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        app:adSize="BANNER"
+        app:adUnitId="@string/banner_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_bunga_efektif" />
+
     <!-- EditText for Loan Amount -->
     <EditText
         android:id="@+id/et_pinjaman_efektif"
@@ -35,7 +47,7 @@
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_bunga_efektif" />
+        app:layout_constraintTop_toBottomOf="@id/BannerView" />
 
     <!-- EditText for Interest Rate -->
     <EditText

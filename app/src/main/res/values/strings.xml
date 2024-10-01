@@ -3,5 +3,6 @@
 
     <string name="todo">TODO</string>
     <string name="interest_calculation">PERHITUNGAN BUNGA</string>
-    <string name="banner_id">ca-app-pub-3940256099942544/6300978111</string>
+<!--    <string name="banner_id">ca-app-pub-3940256099942544/6300978111</string> &lt;!&ndash;Banner DevID&ndash;&gt;-->
+    <string name="banner_id">ca-app-pub-3940256099942544/6300978111</string> <!--Banner ProdID-->
 </resources>

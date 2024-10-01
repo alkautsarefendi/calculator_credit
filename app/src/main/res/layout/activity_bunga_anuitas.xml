@@ -21,6 +21,19 @@
         app:title="Simulasi Anuitas"
         app:titleTextColor="@android:color/white" />
 
+    <!-- AdView Banner -->
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/BannerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        app:adSize="BANNER"
+        app:adUnitId="@string/banner_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
     <EditText
         android:id="@+id/et_pinjamanAnuitas"
         android:layout_width="0dp"
@@ -34,7 +47,7 @@
         android:padding="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/BannerView" />
 
     <EditText
         android:id="@+id/et_bungaAnuitas"
@@ -267,9 +280,7 @@
         android:id="@+id/rv_tabel_simulasiAnuitas"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_margin="@dimen/_16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

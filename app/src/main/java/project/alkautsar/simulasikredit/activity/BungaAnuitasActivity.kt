@@ -17,16 +17,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import project.alkautsar.simulasikredit.R
 import project.alkautsar.simulasikredit.utils.Util
 import project.alkautsar.simulasikredit.adapter.SimulasiCicilanAdapter
 import project.alkautsar.simulasikredit.databinding.ActivityBungaAnuitasBinding
 import project.alkautsar.simulasikredit.model.SimulasiCicilanModel
+import project.alkautsar.simulasikredit.utils.BaseUtils
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 
-class BungaAnuitasActivity : AppCompatActivity() {
+class BungaAnuitasActivity : BaseUtils() {
 
     private lateinit var binding: ActivityBungaAnuitasBinding
     private lateinit var jumlahPinjamanTextView: TextView
@@ -36,10 +39,14 @@ class BungaAnuitasActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Initialize ViewBinding
         binding = ActivityBungaAnuitasBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupInterstitial()
+        MobileAds.initialize(this) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.BannerView.loadAd(adRequest)
 
         // Inisialisasi TextView
         jumlahPinjamanTextView = binding.tvJumlahPinjaman
@@ -54,6 +61,7 @@ class BungaAnuitasActivity : AppCompatActivity() {
 
         // Button click listener
         binding.btnHitungAnuitas.setOnClickListener {
+
             // Get pinjaman value after formatting
             val pinjamanString = binding.etPinjamanAnuitas.text.toString().replace("[^\\d]".toRegex(), "")
             val pinjaman = pinjamanString.toDoubleOrNull() ?: 0.0
@@ -69,6 +77,7 @@ class BungaAnuitasActivity : AppCompatActivity() {
             Log.d("DEBUG", "Pinjaman: $pinjaman, Bunga: $bunga, Tenor: $tenor")
 
             if (pinjaman > 0 && bunga > 0 && tenor > 0) {
+                showInterstitial()
                 val simulasiList = hitungCicilanAnuitas(pinjaman, bunga, tenor)
 
                 binding.llSummary.visibility = View.VISIBLE
@@ -93,6 +102,7 @@ class BungaAnuitasActivity : AppCompatActivity() {
         binding.btnGeneratePdf.setOnClickListener {
             generatePdf()
         }
+
     }
 
     private fun updateSummary(pinjaman: Double, tenor: Int, bunga: Double, simulasiList: List<SimulasiCicilanModel>) {

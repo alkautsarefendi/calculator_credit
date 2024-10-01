@@ -21,11 +21,23 @@
         app:title="Simulasi KPR"
         app:titleTextColor="@android:color/white" />
 
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/BannerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        app:adSize="BANNER"
+        app:adUnitId="@string/banner_id"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_simulasi_kpr" />
+
     <!-- NestedScrollView -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_simulasi_kpr"
+        app:layout_constraintTop_toBottomOf="@id/BannerView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -33,6 +45,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_16dp"
+            android:paddingRight="@dimen/_16dp"
             android:orientation="vertical">
 
             <!-- Input Fields -->
@@ -40,11 +54,11 @@
                 android:id="@+id/et_harga_rumah"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10dp"
+                android:background="@drawable/bg_input_rounded"
                 android:hint="Harga Rumah (Rp)"
                 android:inputType="numberDecimal"
-                android:padding="12dp"
-                android:background="@drawable/bg_input_rounded"
-                android:layout_margin="16dp" />
+                android:padding="12dp" />
 
             <EditText
                 android:id="@+id/et_dp"
@@ -54,7 +68,7 @@
                 android:inputType="numberDecimal"
                 android:background="@drawable/bg_input_rounded"
                 android:padding="12dp"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp"/>
 
             <EditText
                 android:id="@+id/et_tenor_kpr"
@@ -64,7 +78,7 @@
                 android:inputType="number"
                 android:padding="12dp"
                 android:background="@drawable/bg_input_rounded"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp" />
 
             <EditText
                 android:id="@+id/et_bunga_pinjaman"
@@ -74,7 +88,7 @@
                 android:inputType="numberDecimal"
                 android:padding="12dp"
                 android:background="@drawable/bg_input_rounded"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp" />
 
             <EditText
                 android:id="@+id/et_biaya_provisi"
@@ -84,7 +98,7 @@
                 android:inputType="numberDecimal"
                 android:background="@drawable/bg_input_rounded"
                 android:padding="12dp"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp" />
 
             <EditText
                 android:id="@+id/et_biaya_appraisal"
@@ -94,7 +108,7 @@
                 android:inputType="numberDecimal"
                 android:padding="12dp"
                 android:background="@drawable/bg_input_rounded"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp" />
 
             <EditText
                 android:id="@+id/et_biaya_administrasi"
@@ -104,7 +118,7 @@
                 android:inputType="numberDecimal"
                 android:padding="12dp"
                 android:background="@drawable/bg_input_rounded"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp" />
 
             <EditText
                 android:id="@+id/et_biaya_notaris"
@@ -114,7 +128,7 @@
                 android:inputType="numberDecimal"
                 android:padding="12dp"
                 android:background="@drawable/bg_input_rounded"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp" />
 
             <EditText
                 android:id="@+id/et_biaya_asuransi"
@@ -124,7 +138,7 @@
                 android:inputType="numberDecimal"
                 android:padding="12dp"
                 android:background="@drawable/bg_input_rounded"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp" />
 
             <EditText
                 android:id="@+id/et_njoptkp"
@@ -134,14 +148,14 @@
                 android:inputType="numberDecimal"
                 android:background="@drawable/bg_input_rounded"
                 android:padding="12dp"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="@dimen/_10dp" />
 
             <!-- LinearLayout for Buttons -->
             <LinearLayout
                 android:id="@+id/ll_buttons_kpr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginTop="@dimen/_10dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -176,12 +190,9 @@
                 android:id="@+id/ll_summary_kpr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:background="@drawable/bg_table_row"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
                 <!-- Column Headers -->
                 <LinearLayout
@@ -193,30 +204,95 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Jumlah Pinjaman"
+                        android:text="Harga Rumah (Rp)"
                         android:textColor="@android:color/black"
                         android:padding="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lama Pinjaman"
+                        android:text="Uang Muka (Rp)"
                         android:textColor="@android:color/black"
                         android:padding="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Bunga (%)"
+                        android:text="Plafon Pinjaman (Rp)"
                         android:textColor="@android:color/black"
                         android:padding="8dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Angsuran Tetap"
+                        android:text="Bunga Pertahun (%)"
                         android:textColor="@android:color/black"
                         android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tenor (Bulan)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Biaya Provisi (Rp)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Biaya Appraisal (Rp)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Biaya Administrasi (Rp)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Biaya Notaris (Rp)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Biaya Asuransi (Rp)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pajak Pembeli/BPHTB (Rp)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Biaya dan Pajak (Rp)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pembayaran Pertama (Rp)"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+
                 </LinearLayout>
 
                 <!-- Data Rows -->
@@ -227,7 +303,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_jumlah_pinjaman_kpr"
+                        android:id="@+id/tv_harga_rumah_kpr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -235,7 +311,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/tv_lama_pinjaman_kpr"
+                        android:id="@+id/tv_dp_kpr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -243,7 +319,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/tv_bunga_kpr"
+                        android:id="@+id/tv_plafon_pinjaman_kpr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -251,7 +327,79 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/tv_angsuran_kpr"
+                        android:id="@+id/tv_bunga_pinjaman_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_tenor_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_biaya_provisi_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_biaya_appraisal_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_biaya_administrasi_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_biaya_notaris_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_biaya_asuransi_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_pajak_pembeli_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_total_biaya_pajak_kpr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@android:color/black"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/tv_total_pembayaran_kpr"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -260,13 +408,15 @@
                 </LinearLayout>
             </LinearLayout>
 
+
             <!-- RecyclerView for payment scheme -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvCicilanKPR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:layout_margin="16dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/_16dp"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

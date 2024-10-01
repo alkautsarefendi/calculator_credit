@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Simulasi Kredit</string>
+    <string name="app_name">Simulasi KPR</string>
 
     <string name="todo">TODO</string>
     <string name="interest_calculation">PERHITUNGAN BUNGA</string>

@@ -4,17 +4,35 @@
     android:id="@+id/ad_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:paddingLeft="16dp"
+    android:paddingRight="@dimen/_16dp">
 
     <!-- Container untuk Native Ad Layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:padding="5dp"
         android:background="#FFFFFF"
         android:elevation="2dp"
         android:layout_gravity="center_horizontal">
+
+        <!-- MediaView untuk Gambar atau Video -->
+        <com.google.android.gms.ads.nativead.MediaView
+            android:id="@+id/ad_media"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="centerCrop"/>
+
+        <!-- Tambahkan ImageView untuk menampilkan gambar jika tidak ada video -->
+        <ImageView
+            android:id="@+id/ad_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"/> <!-- Defaultnya tersembunyi -->
 
         <!-- Headline Ad -->
         <TextView
@@ -24,7 +42,7 @@
             android:textStyle="bold"
             android:textSize="18sp"
             android:textColor="#000000"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <!-- Body Ad -->
         <TextView
@@ -33,17 +51,17 @@
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:textColor="#444444"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <!-- Call to Action Button -->
         <Button
             android:id="@+id/ad_call_to_action"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Call to Action"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF"
+            android:layout_gravity="center_horizontal"
             android:backgroundTint="#007BFF"
-            android:layout_gravity="center_horizontal"/>
+            android:text="Call to Action"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
     </LinearLayout>
 </com.google.android.gms.ads.nativead.NativeAdView>

@@ -44,7 +44,9 @@ class BungaTetapActivity : BaseUtils() {
             resetFields()
         }
 
-
+        binding.toolbarBungaTetap.setNavigationOnClickListener {
+            onBackPressed() // Handle back button press
+        }
 
     }
 

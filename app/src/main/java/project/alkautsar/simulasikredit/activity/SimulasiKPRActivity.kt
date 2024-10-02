@@ -59,6 +59,10 @@ class SimulasiKPRActivity : BaseUtils() {
 
         }
 
+        binding.toolbarSimulasiKpr.setNavigationOnClickListener {
+            onBackPressed() // Handle back button press
+        }
+
     }
 
     private fun setupTextWatchers() {

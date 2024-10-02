@@ -42,6 +42,10 @@ class BungaEfektifActivity : BaseUtils() {
             resetFields()
         }
 
+        binding.toolbarBungaEfektif.setNavigationOnClickListener {
+            onBackPressed() // Handle back button press
+        }
+
     }
 
     private fun calculateEffectiveInterest() {

@@ -25,6 +25,7 @@ class MainActivity : BaseUtils() {
 
         val adViewContainer = binding.nativeAdContainer
         loadNativeAd(adViewContainer)
+
         MobileAds.initialize(this) {}
         val adRequest = AdRequest.Builder().build()
         binding.BannerView.loadAd(adRequest)

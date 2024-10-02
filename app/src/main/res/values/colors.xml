@@ -242,7 +242,6 @@
     <color name="m3_sys_color_dark_on_secondary_container">@color/m3_ref_palette_secondary90</color>
     <color name="m3_sys_color_dark_on_surface">@color/m3_ref_palette_neutral90</color>
     <color name="m3_sys_color_dark_on_surface_variant">@color/m3_ref_palette_neutral_variant80</color>
-    <color name="m3_sys_color_dark_on_tertiary">@color/m3_ref_palette_tertiary20</color>
     <color name="m3_sys_color_dark_on_tertiary_container">@color/m3_ref_palette_tertiary90</color>
     <color name="m3_sys_color_dark_outline">@color/m3_ref_palette_neutral_variant60</color>
     <color name="m3_sys_color_dark_outline_variant">@color/m3_ref_palette_neutral_variant30</color>

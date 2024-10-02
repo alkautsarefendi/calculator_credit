@@ -3,8 +3,10 @@ package project.alkautsar.simulasikredit.utils
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.ads.AdError
@@ -18,6 +20,7 @@ import com.google.android.gms.ads.admanager.AdManagerAdRequest
 import com.google.android.gms.ads.admanager.AdManagerAdView
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdOptions
 import com.google.android.gms.ads.nativead.NativeAdView
@@ -194,21 +197,41 @@ open class BaseUtils : AppCompatActivity() {
     private fun displayNativeAd(nativeAd: NativeAd, adViewContainer: FrameLayout) {
         val adView = LayoutInflater.from(this).inflate(R.layout.native_ad_layout, null) as NativeAdView
 
-        // Set Native Ad Data (judul, icon, dll.)
+        // Set Native Ad Data (headline, body, call to action)
         adView.headlineView = adView.findViewById(R.id.ad_headline)
         adView.bodyView = adView.findViewById(R.id.ad_body)
         adView.callToActionView = adView.findViewById(R.id.ad_call_to_action)
+        adView.mediaView = adView.findViewById(R.id.ad_media) as MediaView
+        val adImageView = adView.findViewById<ImageView>(R.id.ad_image) // ImageView untuk gambar
 
-        // Isi data ke dalam view
+        // Set text untuk headline dan body
         (adView.headlineView as TextView).text = nativeAd.headline
         (adView.bodyView as TextView).text = nativeAd.body
         (adView.callToActionView as Button).text = nativeAd.callToAction
 
-        // Tampilkan adView ke dalam container
+        // Cek apakah ada konten media (video/gambar)
+        if (nativeAd.mediaContent != null) {
+            adView.mediaView?.visibility = View.VISIBLE
+            adImageView.visibility = View.GONE // Sembunyikan ImageView jika ada video/gambar di MediaView
+            adView.mediaView?.setMediaContent(nativeAd.mediaContent)
+        } else if (nativeAd.images.isNotEmpty()) {
+            adView.mediaView?.visibility = View.GONE // Sembunyikan MediaView jika hanya ada gambar
+            adImageView.visibility = View.VISIBLE
+            adImageView.setImageDrawable(nativeAd.images[0].drawable) // Set gambar di ImageView
+        } else {
+            adView.mediaView?.visibility = View.GONE
+            adImageView.visibility = View.GONE // Sembunyikan jika tidak ada gambar atau video
+        }
+
+        // Tambahkan adView ke dalam container
         adViewContainer.removeAllViews()
         adViewContainer.addView(adView)
 
-        // Atur Native Ad
+        // Set Native Ad
         adView.setNativeAd(nativeAd)
     }
+
+
+
+
 }
